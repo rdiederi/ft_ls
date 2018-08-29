@@ -52,3 +52,46 @@ t_dlist        *init_listenv(char **env)
     }
     return (tmp);
 }
+
+void    movelinkbackbyone(t_dir *dir, t_statinfo *b, t_statinfo *c)
+{
+    t_statinfo    *a;
+    t_statinfo    *tmpb;
+    t_statinfo    *tmpc;
+    int            flag;
+
+    a = dir->files;
+    tmpb = b;
+    tmpc = c;
+    flag = 0;
+    if (ft_strcmp(a->name, b->name) != 0)
+    {
+        flag = 1;
+        while (ft_strcmp(a->next->name, b->name) != 0)
+            a = a->next;
+    }
+    if (flag == 1)
+        a->next = tmpc;
+    else
+        dir->files = tmpc;
+    tmpb->next = tmpc->next;
+    tmpc->next = tmpb;
+}
+
+
+void    alphasortfile(t_dir *tmp)
+{
+    t_statinfo    *file;
+
+    file = tmp->files;
+    while (file)
+    {
+        if (file->next != NULL && stringcomp(file->name, file->next->name) == 1)
+        {
+            movelinkbackbyone(tmp, file, file->next);
+            file = tmp->files;
+        }
+        else
+            file = file->next;
+    }
+}

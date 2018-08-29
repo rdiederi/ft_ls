@@ -6,11 +6,12 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 21:53:28 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/08/22 01:27:09 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/08/29 16:27:30 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+#include <stdio.h>
 
 #define PATH_MAX 225
 
@@ -49,7 +50,7 @@ static char *ft_strmode(t_file *list)
 	int res;
 	char *permsize;
 
-	res = list->st_mode;
+	res = list->file->s_stat->st_mode;
 	combs[0] = res;
 	chars = "rwxrwxrwx";
 	if (res >= 16384 && res <= 16895) //octal to decimal converted
@@ -79,7 +80,7 @@ char *time_func(char *str, struct stat the_time)
 	return (ret);
 }
 
-void	print_list(t_file *list, t_flag_ls flags, char *path)
+/*void	print_list(t_file *list, t_flag_ls flags, char *path)
 {
 	struct stat tt;
 	
@@ -91,18 +92,49 @@ void	print_list(t_file *list, t_flag_ls flags, char *path)
 	{
 		if (flags.flag_l == 1)
 		{
-			stat(list->name, &tt);
+
+			stat(list->file->name, &tt);
 			permsize = ft_strmode(list);
-			ft_printf("%s % -d %s %s %6zu %s ", permsize, list->st_nlink,
-			list->st_uid, 
-			list->st_gid, 
-			list->size, time_func(list->name, tt));
+			ft_printf("%s % -d %s %s %6zu %s ",
+			permsize, list->file->s_stat->st_nlink,
+			list->file->s_stat->st_uid, 
+			list->file->s_stat->st_gid, 
+			list->file->s_stat->st_size,
+			time_func(list->file->name, tt));
 		}
-		ft_printf("%s\n", list->name);
+		ft_printf("%s\n", list->file->name);
 		// if (flags.flag_br && permsize[0] == 'd')
 		// {
 			// /print_list(list, flags);
 		// }
+		list = list->next;
+	}
+}
+*/
+void	print_list(t_file *list, t_flag_ls flags, char *path)
+{
+	struct	stat 	tt;
+	char 			*permsize;
+	
+	permsize = NULL;
+	if (flags.flag_l)
+		ft_printf("total %d\n", getBlockSize(path));
+	
+	while (list)
+	{
+		if (flags.flag_l == 1)
+		{
+			stat(list->file->name, &tt);
+			permsize = ft_strmode(list);
+			ft_printf("%s % -d %s  %s %6llu %s ",
+			permsize,
+			list->file->s_stat->st_nlink,
+			list->file->s_stat->st_uid,
+			list->file->s_stat->st_gid,
+			list->file->s_stat->size,
+			time_func(list->file->name, tt));
+		}
+		ft_printf("%s\n", list->file->name);
 		list = list->next;
 	}
 }
