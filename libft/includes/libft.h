@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdiederi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:06:01 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/07/25 15:03:52 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/08/29 19:13:49 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ int 				ft_str_is_numeric(char *str);
 int 				ft_str_is_printable(char *str);
 int 				ft_str_is_uppercase(char *str);
 char 				*ft_str_tolower(char *str);
+t_list				*ft_lstswap(t_list *lst1, t_list *lst2);
 
 #endif

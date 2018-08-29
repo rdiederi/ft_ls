@@ -6,7 +6,7 @@
 #    By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/31 02:35:30 by rdiederi          #+#    #+#              #
-#    Updated: 2018/08/06 14:27:39 by rdiederi         ###   ########.fr        #
+#    Updated: 2018/08/29 19:15:52 by rdiederi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,8 @@ LIBFT_SRC = ft_memset.c\
 			ft_iscntrl.c\
 			ft_isblank.c\
 			ft_count_whitespace.c\
-			ft_abs.c
+			ft_abs.c\
+			ft_lstswap.c
 LIBFT =		$(addprefix My_libft/, $(LIBFT_SRC))
 ################################################################################
 
