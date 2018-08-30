@@ -6,49 +6,46 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 21:53:28 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/08/29 18:02:32 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/08/30 18:12:07 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
-#include <stdio.h>
 
-#define PATH_MAX 225
-
-int getBlockSize(char* directory, t_flag_ls flags) 
+static int		get_block_size(char *directory, t_flag_ls flags)
 {
-   int size = 0;
+	int				size;
+	DIR				*d;
+	struct dirent	*dir;
+	struct stat		file_stat;
+	char			info_path[PATH_MAX + 1];
 
-   DIR *d;
-   struct dirent *dir;
-   struct stat fileStat;
-   d = opendir(directory);
-   if (d) {
-       while ((dir = readdir(d)) != NULL) 
-	   {
-		   if ((flags.flag_a == 0) && dir->d_name[0] == '.')
+	d = opendir(directory);
+	size = 0;
+	if (d)
+	{
+		while ((dir = readdir(d)) != NULL)
+		{
+			if ((flags.flag_a == 0) && dir->d_name[0] == '.')
 				continue;
-               // Create the path to stat
-			char info_path[PATH_MAX + 1];
-            strcpy(info_path, directory);
-            if (directory[strlen(directory) - 1] != '/')
-                strcat(info_path, "/");
-            strcat(info_path, dir->d_name);
-            stat(info_path, &fileStat);
-            size += fileStat.st_blocks;
-       }
-   }
-
-   return size;
+			ft_strcpy(info_path, directory);
+			if (directory[ft_strlen(directory) - 1] != '/')
+				ft_strcat(info_path, "/");
+			ft_strcat(info_path, dir->d_name);
+			stat(info_path, &file_stat);
+			size += file_stat.st_blocks;
+		}
+	}
+	return (size);
 }
 
-static char *ft_strmode(t_file *list)
+static char		*ft_strmode(t_file *list)
 {
-	size_t i;
-	const char *chars;
-	mode_t combs[1];
-	int res;
-	char *permsize;
+	size_t		i;
+	const char	*chars;
+	mode_t		combs[1];
+	int			res;
+	char		*permsize;
 
 	res = list->file->st_mode;
 	combs[0] = res;
@@ -67,7 +64,7 @@ static char *ft_strmode(t_file *list)
 	return (permsize);
 }
 
-char *time_func(char *str, struct stat the_time)
+static char		*time_func(char *str, struct stat the_time)
 {
 	char *ret;
 
@@ -78,16 +75,18 @@ char *time_func(char *str, struct stat the_time)
 	return (ret);
 }
 
-void	print_list(t_file *list, t_flag_ls flags, char *path)
+void			print_list(t_file *list, t_flag_ls flags, char *path)
 {
-	struct	stat 	tt;
-	char 			*permsize;
-	
+	struct stat		tt;
+	char			*permsize;
+
 	permsize = NULL;
 	if (flags.flag_l)
-		ft_printf("total %d\n", getBlockSize(path, flags));
-	while (list){
-		if (flags.flag_l == 1){
+		ft_printf("total %d\n", get_block_size(path, flags));
+	while (list)
+	{
+		if (flags.flag_l == 1)
+		{
 			stat(list->file->name, &tt);
 			permsize = ft_strmode(list);
 			ft_printf("%s % -d %s  %s %6llu %s ",

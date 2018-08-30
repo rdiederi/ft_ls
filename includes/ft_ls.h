@@ -6,7 +6,7 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 15:46:12 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/08/29 19:28:55 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/08/30 18:41:24 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,29 @@
 # include <uuid/uuid.h>
 # include <grp.h>
 
+#define PATH_MAX 225
+
 typedef struct			s_flagtype_ls
 {
-	int flag_a;
-	int flag_t;
-	int flag_l;
-	int flag_r;
-	int flag_br;
-	int total;
+	int					flag_a;
+	int					flag_t;
+	int					flag_l;
+	int					flag_r;
+	int					flag_br;
+	int					total;
 }						t_flag_ls;
 
 typedef struct			s_fileinfo
 {
-	quad_t				st_blocks;	/*number of blocks the file takes up;*/
-	nlink_t				st_nlink;	/* mode / system links*/
-	off_t				size;		/*size of file in bytes // before date*/
-	mode_t				st_mode;	/*get chmod (permissions)*/
-	char				*st_uid;		/* owner name*/
-	char				*st_gid;		/* owner group*/
+	quad_t				st_blocks;
+	nlink_t				st_nlink;
+	off_t				size;
+	mode_t				st_mode;
+	char				*st_uid;
+	char				*st_gid;
 	time_t				time;
 	long				ntime;
-	// struct timespec 	st_time;	/*last modification*/
-	char 				*name;
+	char				*name;
 }						t_fileinfo;
 
 typedef struct			s_file
@@ -54,12 +55,14 @@ typedef struct			s_file
 	struct s_file		*next;
 }						t_file;
 
-int			main(int argv, char **argc);
-t_flag_ls	get_flags(char *str, t_flag_ls	flags);
-void		print_list(t_file *list, t_flag_ls flags, char *s);
-t_flag_ls	ft_init();
-t_file		*sort_list(t_file* lst, t_flag_ls flags);
-t_file		*rsort_list(t_file* lst);
-t_file		*tsort_list(t_file* lst);
-	
+int						main(int argv, char **argc);
+t_flag_ls				get_flags(char *str, t_flag_ls	flags);
+void					print_list(t_file *list, t_flag_ls flags, char *s);
+t_flag_ls				ft_init(void);
+t_file					*sort_list(t_file *lst, t_flag_ls flags);
+t_file					*rsort_list(t_file *lst);
+t_file					*tsort_list(t_file *lst);
+t_file					*lst_swap(t_file *lst1, t_file *lst2);
+t_file					*rtsort_list(t_file *lst);
+
 #endif
