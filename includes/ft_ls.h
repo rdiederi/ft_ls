@@ -6,7 +6,7 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 15:46:12 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/08/30 18:41:24 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/03 15:22:02 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ t_file					*sort_list(t_file *lst, t_flag_ls flags);
 t_file					*rsort_list(t_file *lst);
 t_file					*tsort_list(t_file *lst);
 t_file					*lst_swap(t_file *lst1, t_file *lst2);
-t_file					*rtsort_list(t_file *lst);
+char					*time_func(char *str, struct stat the_time);
 
 #endif

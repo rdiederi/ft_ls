@@ -6,7 +6,7 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 21:53:28 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/08/30 18:12:07 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/03 16:32:29 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,13 @@ static char		*ft_strmode(t_file *list)
 	return (permsize);
 }
 
-static char		*time_func(char *str, struct stat the_time)
-{
-	char *ret;
-
-	stat(str, &the_time);
-	ret = ctime(&the_time.st_mtime);
-	ret = ret + 4;
-	ret[12] = '\0';
-	return (ret);
-}
-
 void			print_list(t_file *list, t_flag_ls flags, char *path)
 {
 	struct stat		tt;
-	char			*permsize;
+	char			*pms;
+	char			*date;
 
-	permsize = NULL;
+	pms = NULL;
 	if (flags.flag_l)
 		ft_printf("total %d\n", get_block_size(path, flags));
 	while (list)
@@ -88,16 +78,18 @@ void			print_list(t_file *list, t_flag_ls flags, char *path)
 		if (flags.flag_l == 1)
 		{
 			stat(list->file->name, &tt);
-			permsize = ft_strmode(list);
+			pms = ft_strmode(list);
+			date = time_func(list->file->name, tt);
 			ft_printf("%s % -d %s  %s %6llu %s ",
-			permsize,
+			pms,
 			list->file->st_nlink,
 			list->file->st_uid,
 			list->file->st_gid,
 			list->file->size,
-			time_func(list->file->name, tt));
+			date);
 		}
 		ft_printf("%s\n", list->file->name);
 		list = list->next;
+		free(date);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 11:03:20 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/08/30 18:55:03 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/03 15:11:55 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,13 @@ static int		print_ls(char *d, t_flag_ls f_list)
 		return (0);
 	f_list = get_flags(d, f_list);
 	list = make_list(head, f_list, d);
-	if (f_list.flag_t)
+	if (f_list.flag_r && f_list.flag_t)
+	{
 		list = tsort_list(list);
-	// if (f_list.flag_r && f_list.flag_t)
-	// 	list = rtsort_list(list);
+		list = rsort_list(list);
+	}
+	else if (f_list.flag_t)
+		list = tsort_list(list);
 	print_list(list, f_list, d);
 	closedir(dir);
 	return (1);

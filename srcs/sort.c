@@ -6,7 +6,7 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 17:42:40 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/08/30 18:53:27 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/03 15:12:18 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,28 @@ t_file	*sort_list(t_file *lst, t_flag_ls flags)
 			lst = lst->next;
 	}
 	lst = tmp;
-	if (flags.flag_r && !flags.flag_t)
+	if (flags.flag_r)
 		lst = rsort_list(lst);
 	return (lst);
 }
 
-t_file	*rsort_list(t_file *lst)
+t_file			*rsort_list(t_file *lst)
 {
-	char	*overflow;
-	t_file	*tmp;
+	t_file *a;
+	t_file *b;
+	t_file *c;
 
-	tmp = lst;
-	while (lst->next != NULL)
+	a = NULL;
+	b = lst;
+	c = (lst)->next;
+	while (b)
 	{
-		if (ft_strcmp(lst->file->name, lst->next->file->name) < 0)
-		{
-			overflow = lst->file->name;
-			lst->file->name = lst->next->file->name;
-			lst->next->file->name = overflow;
-			lst = tmp;
-		}
-		else
-			lst = lst->next;
+		c = b->next;
+		b->next = a;
+		a = b;
+		b = c;
 	}
-	lst = tmp;
-	return (lst);
+	return (a);
 }
 
 t_file	*tsort_list(t_file *lst)
@@ -83,32 +80,6 @@ t_file	*tsort_list(t_file *lst)
 	else if (lst->next && lst->file->time == lst->next->file->time)
 	{
 		if (lst->next && (lst->file->ntime < lst->next->file->ntime))
-		{
-			lst = lst_swap(lst, lst->next);
-			lst->next = tsort_list(lst->next);
-		}
-	}
-	return (lst);
-}
-
-t_file	*rtsort_list(t_file *lst)
-{
-	if (!lst)
-		return (NULL);
-	if (lst->next && (lst->file->time > lst->next->file->time))
-		lst = lst_swap(lst, lst->next);
-	else if (lst->next && lst->file->time == lst->next->file->time)
-		if (lst->next && (lst->file->ntime > lst->next->file->ntime))
-			lst = lst_swap(lst, lst->next);
-	lst->next = tsort_list(lst->next);
-	if (lst->next && (lst->file->time > lst->next->file->time))
-	{
-		lst = lst_swap(lst, lst->next);
-		lst->next = tsort_list(lst->next);
-	}
-	else if (lst->next && lst->file->time == lst->next->file->time)
-	{
-		if (lst->next && (lst->file->ntime > lst->next->file->ntime))
 		{
 			lst = lst_swap(lst, lst->next);
 			lst->next = tsort_list(lst->next);

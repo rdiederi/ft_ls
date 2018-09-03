@@ -6,7 +6,7 @@
 #    By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/31 02:35:30 by rdiederi          #+#    #+#              #
-#    Updated: 2018/08/30 18:10:32 by rdiederi         ###   ########.fr        #
+#    Updated: 2018/09/03 15:29:52 by rdiederi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS_NAME = main.c \
 			print_list.c \
 			ft_init.c \
 			sort.c \
+			t_detail.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 OBJ = $(addprefix $(OBJ_PATH), $(SRCS_NAME:.c=.o))
