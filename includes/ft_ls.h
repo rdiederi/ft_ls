@@ -6,7 +6,7 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 15:46:12 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/09/03 15:22:02 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/03 16:40:25 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <uuid/uuid.h>
 # include <grp.h>
 
-#define PATH_MAX 225
+# define PATH_MAX 225
 
 typedef struct			s_flagtype_ls
 {

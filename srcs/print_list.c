@@ -6,7 +6,7 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 21:53:28 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/09/03 16:32:29 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/03 16:44:16 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void			print_list(t_file *list, t_flag_ls flags, char *path)
 	char			*pms;
 	char			*date;
 
-	pms = NULL;
 	if (flags.flag_l)
 		ft_printf("total %d\n", get_block_size(path, flags));
 	while (list)

@@ -6,7 +6,7 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 15:20:51 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/09/03 16:30:16 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/03 16:41:35 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static char		*join_date(char *date, char *month, char *time_)
 	return (s_date);
 }
 
-char		*time_func(char *str, struct stat the_time)
+char			*time_func(char *str, struct stat the_time)
 {
 	char	*ret;
 	char	*date;

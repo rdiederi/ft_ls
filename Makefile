@@ -6,14 +6,14 @@
 #    By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/31 02:35:30 by rdiederi          #+#    #+#              #
-#    Updated: 2018/09/03 15:29:52 by rdiederi         ###   ########.fr        #
+#    Updated: 2018/09/03 16:43:23 by rdiederi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
 ### PATH ###
-SRCS_PATH = src/
+SRCS_PATH = srcs/
 OBJ_PATH  = obj/
 LIBFT_PATH = libft/
 
