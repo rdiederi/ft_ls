@@ -6,7 +6,7 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/07 15:46:12 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/09/03 16:40:25 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/04 23:26:59 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct			s_fileinfo
 	time_t				time;
 	long				ntime;
 	char				*name;
+	char				*full_path;
 }						t_fileinfo;
 
 typedef struct			s_file
@@ -63,6 +64,6 @@ t_file					*sort_list(t_file *lst, t_flag_ls flags);
 t_file					*rsort_list(t_file *lst);
 t_file					*tsort_list(t_file *lst);
 t_file					*lst_swap(t_file *lst1, t_file *lst2);
-char					*time_func(char *str, struct stat the_time);
+char					*time_func(char *str, t_file *the_time);
 
 #endif

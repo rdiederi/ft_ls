@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_is_numeric.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdiederi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 18:21:00 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/07/12 18:25:55 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/04 23:30:52 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_str_is_numeric(char *str)
+int		ft_str_is_numeric(char *str)
 {
-	int i = 0;
+	int i;
+
+	i = 0;
 	while (str[i] != '\0')
 	{
 		if (!(str[i] >= '0' && str[i] <= '9'))

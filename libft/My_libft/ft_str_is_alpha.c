@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdiederi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 18:16:25 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/07/12 18:19:39 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/04 23:31:21 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_str_is_alpha(char *str)
+int		ft_str_is_alpha(char *str)
 {
 	while (str[0] != '\0')
 	{

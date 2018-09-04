@@ -6,7 +6,7 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 15:20:51 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/09/03 16:41:35 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/04 23:26:37 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ static char		*join_date(char *date, char *month, char *time_)
 	return (s_date);
 }
 
-char			*time_func(char *str, struct stat the_time)
+char			*time_func(char *str, t_file *the_time)
 {
 	char	*ret;
 	char	*date;
 	char	*month;
 	char	*time_;
 
-	stat(str, &the_time);
-	ret = ctime(&the_time.st_mtime);
+	str = NULL;
+	ret = ctime(&the_time->file->ntime);
 	time_ = ft_strdup(get_time(ret));
 	date = get_date(ret);
 	month = get_month(ret);

@@ -6,11 +6,12 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 21:53:28 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/09/03 16:44:16 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/04 23:24:42 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+#include <stdio.h>
 
 static int		get_block_size(char *directory, t_flag_ls flags)
 {
@@ -39,29 +40,63 @@ static int		get_block_size(char *directory, t_flag_ls flags)
 	return (size);
 }
 
-static char		*ft_strmode(t_file *list)
+static char		get_file_type(int mode)
 {
-	size_t		i;
-	const char	*chars;
-	mode_t		combs[1];
-	int			res;
-	char		*permsize;
-
-	res = list->file->st_mode;
-	combs[0] = res;
-	chars = "rwxrwxrwx";
-	if (res >= 16384 && res <= 16895)
-		ft_printf("d");
-	else if (res >= 40960 && res <= 41471)
-		ft_printf("l");
+	mode = (mode & S_IFMT);
+	if (S_ISREG(mode))
+		return ('-');
+	else if (S_ISDIR(mode))
+		return ('d');
+	else if (S_ISLNK(mode))
+		return ('l');
+	else if (S_ISBLK(mode))
+		return ('b');
+	else if (S_ISCHR(mode))
+		return ('c');
+	else if (S_ISSOCK(mode))
+		return ('s');
+	else if (S_ISFIFO(mode))
+		return ('p');
 	else
-		ft_printf("-");
-	permsize = (char *)malloc(sizeof(char) * 10);
-	i = -1;
-	while (++i < 9)
-		permsize[i] = (combs[0] & (1 << (8 - i))) ? chars[i] : '-';
-	permsize[9] = '\0';
-	return (permsize);
+		return ('-');
+}
+
+static char		*display_chmod(int mode)
+{
+	char *chmod;
+
+	chmod = (char *)malloc(sizeof(char) * 11);
+	chmod[0] = get_file_type(mode);
+	chmod[1] = (S_IRUSR & mode) ? 'r' : '-';
+	chmod[2] = (S_IWUSR & mode) ? 'w' : '-';
+	chmod[3] = (S_IXUSR & mode) ? 'x' : '-';
+	chmod[4] = (S_IRGRP & mode) ? 'r' : '-';
+	chmod[5] = (S_IWGRP & mode) ? 'w' : '-';
+	chmod[6] = (S_IXGRP & mode) ? 'x' : '-';
+	chmod[7] = (S_IROTH & mode) ? 'r' : '-';
+	chmod[8] = (S_IWOTH & mode) ? 'w' : '-';
+	chmod[9] = (S_IXOTH & mode) ? 'x' : '-';
+	chmod[10] = '\0';
+	return (chmod);
+}
+
+static	void	get_name(t_file *list, char *path)
+{
+	char			buf[PATH_MAX + 1];
+	char			*str_1;
+	char			*str_2;
+	char			*str_3;
+
+	str_1 = ft_strjoin(path, "/");
+	str_2 = ft_strjoin(str_1, list->file->name);
+	str_3 = ft_strjoin("/sgoinfre/rdiederi/ft_ls_F/ft_ls_C/", str_2);
+	path = NULL;
+	ft_bzero(buf, PATH_MAX + 1);
+	readlink(str_3, buf, PATH_MAX);
+	ft_printf("%s -> %s\n", list->file->name, buf);
+	free(str_1);
+	free(str_2);
+	free(str_3);
 }
 
 void			print_list(t_file *list, t_flag_ls flags, char *path)
@@ -76,18 +111,16 @@ void			print_list(t_file *list, t_flag_ls flags, char *path)
 	{
 		if (flags.flag_l == 1)
 		{
-			stat(list->file->name, &tt);
-			pms = ft_strmode(list);
-			date = time_func(list->file->name, tt);
-			ft_printf("%s % -d %s  %s %6llu %s ",
-			pms,
-			list->file->st_nlink,
-			list->file->st_uid,
-			list->file->st_gid,
-			list->file->size,
-			date);
+			lstat(ft_strjoin(path, list->file->name), &tt);
+			pms = display_chmod(list->file->st_mode);
+			date = time_func(ft_strjoin(path, list->file->name), list);
+			ft_printf("%s % -d %s  %s %6llu %s ", pms, list->file->st_nlink,
+			list->file->st_uid, list->file->st_gid, list->file->size, date);
 		}
-		ft_printf("%s\n", list->file->name);
+		if (S_ISLNK(list->file->st_mode) && flags.flag_l)
+			get_name(list, path);
+		else
+			ft_printf("%s\n", list->file->name);
 		list = list->next;
 		free(date);
 	}

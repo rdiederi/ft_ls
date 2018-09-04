@@ -6,7 +6,7 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:06:01 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/08/29 19:13:49 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/04 23:47:46 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putendl_fd(char const *s, int fd);
-size_t  			ft_abs(int n);
+size_t				ft_abs(int n);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void*, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
@@ -101,12 +101,12 @@ int					ft_isxdigit(int c);
 char				*ft_itoa_base(int value, int base);
 void				*ft_memdup(const void *src, size_t n);
 char				*ft_nbr_to_oct(int value);
-int 				ft_str_is_alpha(char *str);
-int 				ft_str_is_lowercase(char *str);
-int 				ft_str_is_numeric(char *str);
-int 				ft_str_is_printable(char *str);
-int 				ft_str_is_uppercase(char *str);
-char 				*ft_str_tolower(char *str);
+int					ft_str_is_alpha(char *str);
+int					ft_str_is_lowercase(char *str);
+int					ft_str_is_numeric(char *str);
+int					ft_str_is_printable(char *str);
+int					ft_str_is_uppercase(char *str);
+char				*ft_str_tolower(char *str);
 t_list				*ft_lstswap(t_list *lst1, t_list *lst2);
 
 #endif

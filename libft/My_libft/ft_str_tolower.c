@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_tolower.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdiederi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 18:33:45 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/07/12 18:39:05 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/04 23:32:26 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_str_tolower(char *str)
+char	*ft_str_tolower(char *str)
 {
-	int i = 0;
+	int i;
+
+	i = 0;
 	while (str[i] != '\0')
 	{
 		if (ft_isupper(str[i]))

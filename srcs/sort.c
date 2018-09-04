@@ -6,7 +6,7 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 17:42:40 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/09/03 16:44:44 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/04 23:25:39 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_file	*sort_list(t_file *lst, t_flag_ls flags)
 	return (lst);
 }
 
-t_file			*rsort_list(t_file *lst)
+t_file	*rsort_list(t_file *lst)
 {
 	t_file *a;
 	t_file *b;

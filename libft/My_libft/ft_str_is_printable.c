@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_is_printable.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdiederi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 18:31:01 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/07/12 18:31:28 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/04 23:31:37 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_str_is_printable(char *str)
+int		ft_str_is_printable(char *str)
 {
 	while (str[0] != '\0')
 	{

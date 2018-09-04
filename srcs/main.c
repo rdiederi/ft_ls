@@ -6,7 +6,7 @@
 /*   By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/15 11:03:20 by rdiederi          #+#    #+#             */
-/*   Updated: 2018/09/03 16:44:36 by rdiederi         ###   ########.fr       */
+/*   Updated: 2018/09/04 23:28:15 by rdiederi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 static t_file	*get_stats(char *dir, t_file *head, t_file *new)
 {
 	struct stat		buf;
-	char			*half_name;
-	char			*full_name;
 	struct group	*grp;
 	struct passwd	*uid;
+	char			*half_name;
+	char			*full_name;
 
 	new = head;
 	while (new)
 	{
 		half_name = ft_strjoin("/", new->file->name);
 		full_name = ft_strjoin(dir, half_name);
-		stat(full_name, &buf);
+		lstat(full_name, &buf);
 		new->file->st_nlink = buf.st_nlink;
 		new->file->size = buf.st_size;
 		new->file->st_mode = buf.st_mode;
 		new->file->time = buf.st_mtimespec.tv_sec;
-		new->file->ntime = buf.st_mtimespec.tv_nsec;
+		new->file->ntime = buf.st_mtime;
 		uid = getpwuid(buf.st_uid);
 		grp = getgrgid(buf.st_gid);
 		new->file->st_uid = uid->pw_name;
@@ -73,11 +73,8 @@ static int		print_ls(char *d, t_flag_ls f_list)
 	DIR				*dir;
 
 	head = NULL;
-	if (!d)
-		d = ".";
 	if (!(dir = opendir(d)))
 		return (0);
-	f_list = get_flags(d, f_list);
 	list = make_list(head, f_list, d);
 	if (f_list.flag_r && f_list.flag_t)
 	{
@@ -99,20 +96,21 @@ int				main(int argc, char **argv)
 	i = 1;
 	flags = ft_init();
 	if (!argv[i])
-	{
 		print_ls(".", flags);
-		return (0);
-	}
-	while (i < argc)
+	while (i <= argc && argv[i])
 	{
-		if (argv[i][0] == '-')
+		while (argv[i] != '\0' && argv[i][0] == '-')
 		{
 			flags = get_flags(argv[i], flags);
 			i++;
 		}
-		if (!(print_ls(argv[i], flags)))
-			return (0);
-		i++;
+		if (!argv[i])
+			print_ls(".", flags);
+		if (argv[i])
+			if (argv[i][0] != '-')
+				print_ls(argv[i], flags);
+		if (argv[i])
+			i++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: rdiederi <rdiederi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/31 02:35:30 by rdiederi          #+#    #+#              #
-#    Updated: 2018/09/03 16:43:23 by rdiederi         ###   ########.fr        #
+#    Updated: 2018/09/04 13:54:15 by rdiederi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,8 @@ FLAGS = -Wall -Werror -Wextra
 INC = -I ./includes/ -I ./$(LIBFT_PATH)includes/
 
 SRCS_NAME = main.c \
-			get_flag.c \
+			flags.c \
 			print_list.c \
-			ft_init.c \
 			sort.c \
 			t_detail.c \
 
